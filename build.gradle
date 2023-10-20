@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.15'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'ru.habr'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '1.8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2021.0.8")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.cloud:spring-cloud-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // Для работы с шифрованием по ГОСТ.
+    implementation files('jcr/lib/jcrypto-jca-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-ocsp-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-pkcs11-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-pkcs7-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-smime-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-ssl-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-widgets-fx-2.8.6-R42.jar')
+    implementation files('jcr/lib/jcrypto-xmldsig-2.8.6-R42.jar')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,19 @@
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: esia
+
+habr:
+  esia:
+    scope: fullname birthdate gender snils id_doc email contacts kid_fullname kid_birthdate kid_gender kid_snils kid_inn kid_birth_cert_doc kid_medical_doc
+    clientId: client-id # client id в ЕСИА
+    ketStorageDirectory: /home/key/storage/directory
+    ketStoragePassword: password
+    ketFile:  pkiClient-a7f44805-788f-4da7-a408-e6c41a9bac18 # имя контейнера vipnet
+    host: esia-portal1.test.gosuslugi.ru
+    baseUrl: https://esia-portal1.test.gosuslugi.ru/
+    authCodeUlr: https://esia-portal1.test.gosuslugi.ru/aas/oauth2/ac
+    redirectUrl: http://127.0.01:8081
